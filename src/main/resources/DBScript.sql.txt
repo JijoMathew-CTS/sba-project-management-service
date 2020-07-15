@@ -1,0 +1,46 @@
+
+
+CREATE TABLE `jijo`.`parent_task` (
+  `parent_id` INT NOT NULL AUTO_INCREMENT,
+  `parent_task` VARCHAR(100) NULL,
+  PRIMARY KEY (`parent_id`));
+  
+  
+  
+  CREATE TABLE `jijo`.`project` (
+  `project_id` INT NOT NULL AUTO_INCREMENT,
+  `project` VARCHAR(45) NULL,
+  `start_dt` DATETIME NULL,
+  `end_dt` DATETIME NULL,
+  `priority` INT NULL,
+  PRIMARY KEY (`project_id`));
+
+
+
+CREATE TABLE `jijo`.`task` (
+  `task_id` INT NOT NULL AUTO_INCREMENT,
+  `parent_id` INT NULL,
+  `project_id` INT NULL,
+  `task` VARCHAR(45) NULL,
+  `start_dt` DATETIME NULL,
+  `end_dt` DATETIME NULL,
+  `priorty` INT NULL,
+  PRIMARY KEY (`task_id`));
+  
+  ALTER TABLE `jijo`.`task` 
+ADD COLUMN `status` INT NULL AFTER `priorty`;
+  
+  
+  CREATE TABLE `jijo`.`user` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `firstname` VARCHAR(45) NULL,
+  `lastname` VARCHAR(45) NULL,
+  `emp_id` VARCHAR(45) NULL,
+  `project_id` INT NULL,
+  `task_id` INT NULL,
+  PRIMARY KEY (`user_id`));
+
+  
+  
+
+
