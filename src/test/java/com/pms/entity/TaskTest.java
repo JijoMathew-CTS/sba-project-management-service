@@ -14,7 +14,7 @@ public class TaskTest {
 	private Task task;
 
 	@Test
-	public void testProjectTest() {
+	public void testTaskTest() {
 		Date currentDate = new Date();
 		task.setId(1);
 		task.setEndDate(currentDate);

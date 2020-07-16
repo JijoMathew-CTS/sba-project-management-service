@@ -12,7 +12,7 @@ public class UserTest {
 	private User user;
 
 	@Test
-	public void testProjectTest() {
+	public void testUserTest() {
 		user.setId(1);
 		user.setEmployeeId("Emp1");
 		user.setFirstName("Jijo");

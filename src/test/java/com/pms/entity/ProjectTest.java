@@ -21,11 +21,17 @@ public class ProjectTest {
 		project.setPriority(1);
 		project.setProject("HQM");
 		project.setStartDate(currentDate);
+		project.setNoOfCompletedTask(10);
+		project.setNoOfTasks(15);
+		project.setManager(new Manager());
 		project.getEndDate();
 		project.getId();
 		project.getPriority();
 		project.getProject();
 		project.getStartDate();
+		project.getNoOfCompletedTask();
+		project.getNoOfTasks();
+		project.getManager();
 	}
 	
 }
