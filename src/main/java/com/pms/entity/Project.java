@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="project")
@@ -30,6 +31,12 @@ public class Project {
 	@Column(name="priority")
 	private Integer priority;
 
+	@Transient
+	private Integer noOfTasks = 0;
+	
+	@Transient
+	private Integer noOfCompletedTask = 0;
+	
 	
 	public Integer getId() {
 		return id;
@@ -70,6 +77,23 @@ public class Project {
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
+
+	public Integer getNoOfTasks() {
+		return noOfTasks;
+	}
+
+	public void setNoOfTasks(Integer noOfTasks) {
+		this.noOfTasks = noOfTasks;
+	}
+
+	public Integer getNoOfCompletedTask() {
+		return noOfCompletedTask;
+	}
+
+	public void setNoOfCompletedTask(Integer noOfCompletedTask) {
+		this.noOfCompletedTask = noOfCompletedTask;
+	}
+
 	
 	
 }

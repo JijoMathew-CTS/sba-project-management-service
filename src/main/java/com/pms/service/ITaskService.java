@@ -6,8 +6,11 @@ import com.pms.entity.Task;
 
 public interface ITaskService {
 
-	public Integer saveOrUpadte(Task task);
+	public Integer saveOrUpdate(Task task);
 	public Task getTask(Integer id);
 	public List<Task> view();
 	public Integer delete(Integer id);
+	
+	public Integer getCompletedTaskByProjectId(Integer projectId);
+	public Integer getTotalTaskByProjectId(Integer projectId);
 }

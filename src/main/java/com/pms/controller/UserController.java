@@ -23,7 +23,7 @@ public class UserController {
 	
 	@PostMapping("/user/saveorupdate")
 	public Integer createOrUpdate(@RequestBody User user) {
-		return userService.saveOrUpadte(user);
+		return userService.saveOrUpdate(user);
 	}
 	
 	@GetMapping("/user/getUser/{id}")

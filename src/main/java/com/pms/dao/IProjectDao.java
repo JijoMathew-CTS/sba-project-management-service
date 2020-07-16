@@ -6,7 +6,7 @@ import com.pms.entity.Project;
 
 public interface IProjectDao {
 
-	public Integer saveOrUpadte(Project project);
+	public Integer saveOrUpdate(Project project);
 	public Project getProject(Integer id);
 	public List<Project> view();
 	public Integer delete(Integer id);

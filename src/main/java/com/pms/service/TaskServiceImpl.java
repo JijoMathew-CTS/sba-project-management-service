@@ -15,8 +15,8 @@ public class TaskServiceImpl implements ITaskService {
 	private ITaskDao taskDao;
 	
 	@Override
-	public Integer saveOrUpadte(Task task) {
-		return taskDao.saveOrUpadte(task);
+	public Integer saveOrUpdate(Task task) {
+		return taskDao.saveOrUpdate(task);
 	}
 
 	@Override
@@ -33,5 +33,15 @@ public class TaskServiceImpl implements ITaskService {
 	public Integer delete(Integer id) {
 		return taskDao.delete(id);
 		}
+
+	@Override
+	public Integer getCompletedTaskByProjectId(Integer projectId) {
+		return taskDao.getCompletedTaskByProjectId(projectId);
+	}
+
+	@Override
+	public Integer getTotalTaskByProjectId(Integer projectId) {
+		return taskDao.getTotalTaskByProjectId(projectId);
+	}
 
 }

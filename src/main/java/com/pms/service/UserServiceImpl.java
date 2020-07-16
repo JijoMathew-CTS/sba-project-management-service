@@ -15,8 +15,8 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
 	
 	@Override
-	public Integer saveOrUpadte(User user) {
-		return userDao.saveOrUpadte(user);
+	public Integer saveOrUpdate(User user) {
+		return userDao.saveOrUpdate(user);
 	}
 
 	@Override

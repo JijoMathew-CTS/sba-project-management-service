@@ -6,7 +6,7 @@ import com.pms.entity.User;
 
 public interface IUserService {
 	
-	public Integer saveOrUpadte(User user);
+	public Integer saveOrUpdate(User user);
 	public User getUser(Integer id);
 	public List<User> view();
 	public Integer delete(Integer id);

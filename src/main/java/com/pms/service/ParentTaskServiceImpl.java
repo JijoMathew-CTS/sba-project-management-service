@@ -15,8 +15,8 @@ public class ParentTaskServiceImpl implements IParentTaskService {
 	private IParentTaskDao parentTaskDao;
 
 	@Override
-	public Integer saveOrUpadte(ParentTask parentTask) {
-		return parentTaskDao.saveOrUpadte(parentTask);
+	public Integer saveOrUpdate(ParentTask parentTask) {
+		return parentTaskDao.saveOrUpdate(parentTask);
 		}
 
 	@Override

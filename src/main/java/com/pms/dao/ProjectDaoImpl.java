@@ -24,7 +24,7 @@ public class ProjectDaoImpl implements IProjectDao{
 	private EntityManagerFactory entityManagerFactory;
 
 	@Override
-	public Integer saveOrUpadte(Project project) {
+	public Integer saveOrUpdate(Project project) {
 		Integer result=0;
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session=null;

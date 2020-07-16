@@ -23,7 +23,7 @@ public class ParentTaskController {
 
 	@PostMapping("/parentTask/saveorupdate")
 	public Integer createOrUpdate(@RequestBody ParentTask parentTask) {
-		return parentTaskService.saveOrUpadte(parentTask);
+		return parentTaskService.saveOrUpdate(parentTask);
 	}
 	
 	@GetMapping("/parentTask/getParentTask/{id}")

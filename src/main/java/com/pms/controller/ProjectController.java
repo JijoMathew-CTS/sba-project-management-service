@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pms.entity.Project;
 import com.pms.service.IProjectService;
+import com.pms.service.ITaskService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -21,9 +22,12 @@ public class ProjectController {
 	@Autowired
 	private IProjectService projectService;
 	
+	@Autowired
+	private ITaskService taskService;
+	
 	@PostMapping("/project/saveorupdate")
 	public void createOrUpdate(@RequestBody Project project) {
-		projectService.saveOrUpadte(project);
+		projectService.saveOrUpdate(project);
 	}
 	
 	@GetMapping("/project/getProject/{id}")
@@ -35,8 +39,14 @@ public class ProjectController {
 	
 	@GetMapping("/project/getAllProjects")
 	public List<Project> getAllProjects(){
-		return projectService.view();
-		
+		 List<Project> projects =  projectService.view();
+		 for(Project project :  projects) {
+			 int completedTask = taskService.getCompletedTaskByProjectId(project.getId());
+			 int totalTask = taskService.getTotalTaskByProjectId(project.getId());
+			 project.setNoOfCompletedTask(completedTask);
+			 project.setNoOfTasks(totalTask);
+		 }
+		 return projects;
 	}
 	
 	@DeleteMapping("/project/delete/{id}")

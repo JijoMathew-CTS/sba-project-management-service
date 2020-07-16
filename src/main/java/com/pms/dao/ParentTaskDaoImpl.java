@@ -24,7 +24,7 @@ public class ParentTaskDaoImpl implements IParentTaskDao {
 	private EntityManagerFactory entityManagerFactory;
 	
 	@Override
-	public Integer saveOrUpadte(ParentTask parentTask) {
+	public Integer saveOrUpdate(ParentTask parentTask) {
 		Integer result=0;
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session=null;

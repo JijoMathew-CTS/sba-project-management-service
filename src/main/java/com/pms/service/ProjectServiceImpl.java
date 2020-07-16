@@ -15,8 +15,8 @@ public class ProjectServiceImpl implements IProjectService {
 	private IProjectDao projectDao;
 
 	@Override
-	public Integer saveOrUpadte(Project project) {
-		Integer saveOrUpadte = projectDao.saveOrUpadte(project);
+	public Integer saveOrUpdate(Project project) {
+		Integer saveOrUpadte = projectDao.saveOrUpdate(project);
 		return saveOrUpadte;
 	}
 	

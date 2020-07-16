@@ -24,7 +24,7 @@ public class UserDaoImpl implements IUserDao {
 	private EntityManagerFactory entityManagerFactory;
 	
 	@Override
-	public Integer saveOrUpadte(User user) {
+	public Integer saveOrUpdate(User user) {
 		Integer result=0;
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session=null;

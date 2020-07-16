@@ -1,5 +1,6 @@
 package com.pms.dao;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +25,16 @@ public class TaskDaoImpl implements ITaskDao {
 	private EntityManagerFactory entityManagerFactory;
 	
 	@Override
-	public Integer saveOrUpadte(Task task) {
+	public Integer saveOrUpdate(Task task) {
 		Integer result=0;
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session=null;
 		try {
 			session=sessionFactory.openSession();
 			Transaction beginTransaction = session.beginTransaction();
-			 result = (Integer) session.save(task);
-			 beginTransaction.commit();
+			session.saveOrUpdate(task);
+			beginTransaction.commit();
+			result = task.getId();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -102,6 +104,45 @@ public class TaskDaoImpl implements ITaskDao {
 			session.close();
 		}
 		return null;
+	}
+
+	@Override
+	public Integer getCompletedTaskByProjectId(Integer projectId) {
+		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+		java.math.BigInteger result = new BigInteger("0") ;
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			result = (java.math.BigInteger)(session.createNativeQuery("select count(task_id) from task  where project_id = :project_id and status=:status")
+	                 .setParameter("project_id", projectId)
+	                 .setParameter("status", 1)
+	                 .uniqueResult());
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result.intValue();
+	}
+
+	@Override
+	public Integer getTotalTaskByProjectId(Integer projectId) {
+		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+		java.math.BigInteger result = new BigInteger("0") ;
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			result = (java.math.BigInteger)(session.createNativeQuery("select count(task_id) from task  where project_id = :project_id ")
+	                 .setParameter("project_id", projectId)
+	                 .uniqueResult());
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result.intValue();
 	}
 
 }

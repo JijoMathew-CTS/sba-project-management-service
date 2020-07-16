@@ -31,7 +31,7 @@ public class TaskController {
 
 	@PostMapping("/task/saveorupdate")
 	public Integer createOrUpdate(@RequestBody Task task) {
-		return taskService.saveOrUpadte(task);
+		return taskService.saveOrUpdate(task);
 	}
 	
 	@GetMapping("/task/getTask/{id}")
