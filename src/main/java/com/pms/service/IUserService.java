@@ -10,4 +10,5 @@ public interface IUserService {
 	public User getUser(Integer id);
 	public List<User> view();
 	public Integer delete(Integer id);
+	public User getUserByProjectId(Integer projectId);
 }

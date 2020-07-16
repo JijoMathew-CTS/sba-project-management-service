@@ -28,6 +28,8 @@ public class TaskServiceTest  {
 	
 	Integer taskId = 1;
 	
+	Integer projectId = 100;
+	
 	@Test
 	public void createOrUpdateTest() {
 		Task task = new Task();
@@ -61,4 +63,16 @@ public class TaskServiceTest  {
 		assertEquals(count , Integer.valueOf(taskId));
 	}
 	
+	@Test
+	public void getCompletedTaskByProjectIdTest() {
+		when(taskDao.getCompletedTaskByProjectId(projectId)).thenReturn(100);
+		Integer count = taskService.getCompletedTaskByProjectId(projectId);
+		assertNotNull(count);
+	}
+	@Test
+	public void getTotalTaskByProjectIdTest() {
+		when(taskDao.getTotalTaskByProjectId(projectId)).thenReturn(50);
+		Integer count = taskService.getTotalTaskByProjectId(projectId);
+		assertNotNull(count);
+	}
 }

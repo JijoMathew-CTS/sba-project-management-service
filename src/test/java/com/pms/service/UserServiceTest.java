@@ -38,7 +38,7 @@ public class UserServiceTest  {
 	}
 	
 	@Test
-	public void getTaskTest() {
+	public void getUserTest() {
 		User  user = new User();
 		user.setId(1);
 		when(userDao.getUser(userId)).thenReturn(user);
@@ -58,6 +58,16 @@ public class UserServiceTest  {
 		when(userDao.delete(userId)).thenReturn(1);
 		Integer count = userService.delete(userId);
 		assertEquals(count , Integer.valueOf(userId));
+	}
+	
+	@Test
+	public void getUserByProjectIdTest() {
+		Integer projectId = 100;
+		User  user = new User();
+		user.setId(1);
+		when(userDao.getUserByProjectId(projectId)).thenReturn(user);
+		User userReturn = userService.getUserByProjectId(projectId);
+		assertEquals(user.getId(), userReturn.getId());
 	}
 	
 }

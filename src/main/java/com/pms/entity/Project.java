@@ -37,6 +37,9 @@ public class Project {
 	@Transient
 	private Integer noOfCompletedTask = 0;
 	
+	@Transient
+	private Manager manager;
+	
 	
 	public Integer getId() {
 		return id;
@@ -92,6 +95,14 @@ public class Project {
 
 	public void setNoOfCompletedTask(Integer noOfCompletedTask) {
 		this.noOfCompletedTask = noOfCompletedTask;
+	}
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
 	}
 
 	

@@ -31,8 +31,9 @@ public class ParentTaskDaoImpl implements IParentTaskDao {
 		try {
 			session=sessionFactory.openSession();
 			Transaction beginTransaction = session.beginTransaction();
-			 result = (Integer) session.save(parentTask);
-			 beginTransaction.commit();
+			session.saveOrUpdate(parentTask);
+			beginTransaction.commit();
+			result = parentTask.getId();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

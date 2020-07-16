@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -14,7 +15,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.pms.entity.Project;
+import com.pms.entity.User;
 import com.pms.service.IProjectService;
+import com.pms.service.ITaskService;
+import com.pms.service.IUserService;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,6 +29,12 @@ public class ProjectControllerTest  {
 
 	@Mock
 	private  IProjectService projectService;
+	
+	@Mock
+	private ITaskService taskService;
+	
+	@Mock
+	private IUserService userService;
 	
 	@Test
 	public void createOrUpdateTest() {
@@ -46,6 +56,14 @@ public class ProjectControllerTest  {
 	
 	@Test
 	public void getAllProjectsTest() {
+		List<Project> projects =  new ArrayList<>();
+		Project project = new Project();
+		project.setProject("PROJECT1");
+		project.setId(1);
+		projects.add(project);
+		when(projectService.view()).thenReturn(projects);	
+		User user = new User();
+		when(userService.getUserByProjectId(project.getId())).thenReturn(user);	
 		List<Project>  projectsList = projectController.getAllProjects();
 		assertNotNull(projectsList);
 	}

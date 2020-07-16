@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -109,40 +110,42 @@ public class TaskDaoImpl implements ITaskDao {
 	@Override
 	public Integer getCompletedTaskByProjectId(Integer projectId) {
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-		java.math.BigInteger result = new BigInteger("0") ;
+		int result = 0 ;
 		Session session=null;
 		try {
 			session=sessionFactory.openSession();
-			result = (java.math.BigInteger)(session.createNativeQuery("select count(task_id) from task  where project_id = :project_id and status=:status")
-	                 .setParameter("project_id", projectId)
-	                 .setParameter("status", 1)
-	                 .uniqueResult());
-		
+			NativeQuery query = session.createNativeQuery("select count(task_id) from task  where project_id = :project_id and status=:status");
+			BigInteger countValue = (BigInteger) query.setParameter("project_id", projectId).setParameter("status", 1).uniqueResult();
+			if(countValue != null) {
+				result = countValue.intValue();
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			session.close();
 		}
-		return result.intValue();
+		return result;
 	}
 
 	@Override
 	public Integer getTotalTaskByProjectId(Integer projectId) {
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-		java.math.BigInteger result = new BigInteger("0") ;
+		int result = 0 ;
 		Session session=null;
 		try {
 			session=sessionFactory.openSession();
-			result = (java.math.BigInteger)(session.createNativeQuery("select count(task_id) from task  where project_id = :project_id ")
-	                 .setParameter("project_id", projectId)
-	                 .uniqueResult());
+			NativeQuery query = session.createNativeQuery("select count(task_id) from task  where project_id = :project_id ");
+			BigInteger countValue = (BigInteger)query.setParameter("project_id", projectId).uniqueResult();
+			if(countValue != null) {
+				result = countValue.intValue();
+			}
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			session.close();
 		}
-		return result.intValue();
+		return result;
 	}
 
 }

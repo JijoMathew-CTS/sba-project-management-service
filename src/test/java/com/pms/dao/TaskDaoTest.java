@@ -13,11 +13,13 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -54,7 +56,12 @@ public class TaskDaoTest  {
 	@Mock
 	Root<Task> root;
 	
+	@Mock
+	NativeQuery nativeQuery;
+	
 	Integer taskId = 1;
+	
+	Integer projectId = 100;
 	
 	@Before
 	public void init() {
@@ -66,6 +73,9 @@ public class TaskDaoTest  {
 		when(cb.createQuery(Task.class)).thenReturn(createQuery);
 		when(session.createQuery(createQuery)).thenReturn(query);
 		when(createQuery.from(Task.class)).thenReturn(root);
+		when(session.createNativeQuery(Matchers.anyString())).thenReturn(nativeQuery);
+		when(nativeQuery.setParameter(Matchers.anyString(), Matchers.anyInt())).thenReturn(nativeQuery);
+		
 	}
 	
 	@Test
@@ -94,4 +104,14 @@ public class TaskDaoTest  {
 		taskDao.delete(taskId);
 	}
 	
+	
+	@Test
+	public void getCompletedTaskByProjectIdTest() {
+		taskDao.getCompletedTaskByProjectId(projectId);
+	}
+	
+	@Test
+	public void getTotalTaskByProjectIdTest() {
+		taskDao.getTotalTaskByProjectId(projectId);
+	}
 }

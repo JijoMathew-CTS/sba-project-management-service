@@ -8,12 +8,16 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import com.pms.entity.User;
 
@@ -76,10 +80,7 @@ public class UserDaoImpl implements IUserDao {
 			createQuery.select(root);
 			 
 			Query<User> query = session.createQuery(createQuery);
-			results = query.getResultList();
-			//Transaction beginTransaction = session.beginTransaction();
-//			project = (Project)session.
-//			beginTransaction.commit();
+			results = query.getResultList();			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -105,6 +106,27 @@ public class UserDaoImpl implements IUserDao {
 			session.close();
 		}
 		return null;
+	}
+
+	@Override
+	public User getUserByProjectId(Integer projectId) {
+		User user = null;
+		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			Criteria crit = session.createCriteria(User.class);
+			crit.add(Restrictions.eq("project.id", projectId));
+			List<User> results = crit.list();
+			if(!CollectionUtils.isEmpty(results)) {
+				user = results.get(0);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return user;
 	}
 
 }

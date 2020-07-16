@@ -2,6 +2,7 @@ package com.pms.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pms.entity.Manager;
 import com.pms.entity.Project;
+import com.pms.entity.User;
 import com.pms.service.IProjectService;
 import com.pms.service.ITaskService;
+import com.pms.service.IUserService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -25,9 +29,17 @@ public class ProjectController {
 	@Autowired
 	private ITaskService taskService;
 	
+	@Autowired
+	private IUserService userService;
+	
 	@PostMapping("/project/saveorupdate")
 	public void createOrUpdate(@RequestBody Project project) {
 		projectService.saveOrUpdate(project);
+		if(project.getManager() != null && project.getManager().getId() != null) {
+			User user = userService.getUser(project.getManager().getId());
+			user.setProject(project);
+			userService.saveOrUpdate(user);
+		}
 	}
 	
 	@GetMapping("/project/getProject/{id}")
@@ -45,6 +57,15 @@ public class ProjectController {
 			 int totalTask = taskService.getTotalTaskByProjectId(project.getId());
 			 project.setNoOfCompletedTask(completedTask);
 			 project.setNoOfTasks(totalTask);
+			 Manager manager = new Manager();
+			 User user = userService.getUserByProjectId(project.getId());
+			 if(user != null) {
+				 manager.setEmployeeId(user.getEmployeeId());
+				 manager.setFirstName(user.getFirstName());
+				 manager.setLastName(user.getLastName());
+				 manager.setId(user.getId());
+			 }
+			 project.setManager(manager);
 		 }
 		 return projects;
 	}

@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -54,6 +55,9 @@ public class UserDaoTest  {
 	@Mock
 	Root<User> root;
 	
+	@Mock
+	Criteria crit ;
+	
 	Integer userId = 1;
 	
 	@Before
@@ -66,6 +70,8 @@ public class UserDaoTest  {
 		when(cb.createQuery(User.class)).thenReturn(createQuery);
 		when(session.createQuery(createQuery)).thenReturn(query);
 		when(createQuery.from(User.class)).thenReturn(root);
+		when(session.createCriteria(User.class)).thenReturn(crit);
+		
 	}
 	
 	@Test
@@ -76,8 +82,7 @@ public class UserDaoTest  {
 	}
 	
 	@Test
-	public void getUserTest() {
-	
+	public void getUserTest() {	
 		User user = new User();
 		user.setId(userId);
 		userDao.getUser(userId);
@@ -92,6 +97,12 @@ public class UserDaoTest  {
 	@Test
 	public void deleteUserTest() {
 		userDao.delete(userId);
+	}
+	
+	@Test
+	public void getUserByProjectIdTest() {	
+		Integer projectId  = 100;
+		userDao.getUserByProjectId(projectId);
 	}
 	
 }

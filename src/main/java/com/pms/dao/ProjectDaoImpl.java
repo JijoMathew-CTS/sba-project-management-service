@@ -31,8 +31,9 @@ public class ProjectDaoImpl implements IProjectDao{
 		try {
 			session=sessionFactory.openSession();
 			Transaction beginTransaction = session.beginTransaction();
-			 result = (Integer) session.save(project);
+			session.saveOrUpdate(project);
 			 beginTransaction.commit();
+			 result = project.getId();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

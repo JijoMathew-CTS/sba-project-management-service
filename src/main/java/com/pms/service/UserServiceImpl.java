@@ -34,4 +34,9 @@ public class UserServiceImpl implements IUserService {
 		return userDao.delete(id);
 	}
 
+	@Override
+	public User getUserByProjectId(Integer projectId) {
+		return userDao.getUserByProjectId(projectId);
+	}
+
 }

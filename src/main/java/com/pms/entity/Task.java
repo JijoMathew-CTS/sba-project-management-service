@@ -26,7 +26,7 @@ public class Task {
 	
 	@ManyToOne
 	@JoinColumn(name="project_id")
-	private ParentTask project;
+	private Project project;
 	
 	@Column(name="task")
 	private String task;
@@ -59,11 +59,11 @@ public class Task {
 		this.parentTask = parentTask;
 	}
 
-	public ParentTask getProject() {
+	public Project getProject() {
 		return project;
 	}
 
-	public void setProject(ParentTask project) {
+	public void setProject(Project project) {
 		this.project = project;
 	}
 
