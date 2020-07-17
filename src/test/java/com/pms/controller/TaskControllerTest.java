@@ -41,6 +41,17 @@ public class TaskControllerTest  {
 	}
 	
 	@Test
+	public void createOrUpdateParentTaskTest() {
+		Task task = new Task();
+		task.setTask("Development");
+		task.setParent(true);
+		Integer one = 1;
+		when(parentTaskService.saveOrUpdate(Matchers.any(ParentTask.class))).thenReturn(one);
+		Integer result = taskController.createOrUpdate(task);
+		assertEquals(one,result);
+	}
+	
+	@Test
 	public void getTaskTest() {
 		String taskId = "1";
 		Task task = new Task();

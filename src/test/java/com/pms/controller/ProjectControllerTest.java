@@ -14,6 +14,7 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.pms.entity.Manager;
 import com.pms.entity.Project;
 import com.pms.entity.User;
 import com.pms.service.IProjectService;
@@ -39,6 +40,22 @@ public class ProjectControllerTest  {
 	@Test
 	public void createOrUpdateTest() {
 		Project project = new Project();
+		when(projectService.saveOrUpdate(Matchers.any(Project.class))).thenReturn(1);
+		projectController.createOrUpdate(project);
+		assertNotNull(project);
+	}
+	
+	@Test
+	public void createOrUpdateWithParentTest() {
+		Project project = new Project();
+		project.setProject("TES");
+		Integer userId = 100;
+		Manager manager = new Manager();
+		manager.setId(userId);
+		project.setManager(manager);
+		User user = new User();
+		user.setId(userId);
+		when(userService.getUser(userId)).thenReturn(user);
 		when(projectService.saveOrUpdate(Matchers.any(Project.class))).thenReturn(1);
 		projectController.createOrUpdate(project);
 		assertNotNull(project);

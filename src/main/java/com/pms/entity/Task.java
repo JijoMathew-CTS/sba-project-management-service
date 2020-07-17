@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="task")
@@ -42,6 +43,9 @@ public class Task {
 	
 	@Column(name="status")
 	private Integer status;
+	
+	@Transient
+	private boolean parent = false;
 
 	public Integer getId() {
 		return id;
@@ -106,7 +110,13 @@ public class Task {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
 
+	public boolean isParent() {
+		return parent;
+	}
+
+	public void setParent(boolean parent) {
+		this.parent = parent;
+	}
+	
 }

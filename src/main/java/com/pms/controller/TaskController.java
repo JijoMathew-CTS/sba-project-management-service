@@ -31,7 +31,14 @@ public class TaskController {
 
 	@PostMapping("/task/saveorupdate")
 	public Integer createOrUpdate(@RequestBody Task task) {
-		return taskService.saveOrUpdate(task);
+		if(task.isParent()) {
+			ParentTask parentTask = new ParentTask();
+			parentTask.setParentTask(task.getTask());
+			return parentTaskService.saveOrUpdate(parentTask);
+		}
+		else {
+			return taskService.saveOrUpdate(task);
+		}
 	}
 	
 	@GetMapping("/task/getTask/{id}")
