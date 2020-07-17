@@ -24,11 +24,11 @@ CREATE TABLE `jijo`.`task` (
   `task` VARCHAR(45) NULL,
   `start_dt` DATETIME NULL,
   `end_dt` DATETIME NULL,
-  `priorty` INT NULL,
+  `priority` INT NULL,
   PRIMARY KEY (`task_id`));
   
   ALTER TABLE `jijo`.`task` 
-ADD COLUMN `status` INT NULL AFTER `priorty`;
+ADD COLUMN `status` INT NULL AFTER `priority`;
   
   
   CREATE TABLE `jijo`.`user` (
