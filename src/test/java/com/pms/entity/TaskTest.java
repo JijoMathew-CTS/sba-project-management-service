@@ -19,7 +19,7 @@ public class TaskTest {
 		task.setId(1);
 		task.setEndDate(currentDate);
 		task.setParentTask(null);
-		task.setPriorty(1);
+		task.setPriority(1);
 		task.setStartDate(currentDate);
 		task.setProject(null);
 		task.setStatus(1);
@@ -27,7 +27,7 @@ public class TaskTest {
 		task.getId();
 		task.getEndDate();
 		task.getParentTask();
-		task.getPriorty();
+		task.getPriority();
 		task.getStartDate();
 		task.getProject();
 		task.getStatus();

@@ -38,8 +38,8 @@ public class Task {
 	@Column(name="end_dt")
 	private Date endDate;
 	
-	@Column(name="priorty")
-	private Integer priorty;
+	@Column(name="priority")
+	private Integer priority;
 	
 	@Column(name="status")
 	private Integer status;
@@ -95,12 +95,12 @@ public class Task {
 		this.endDate = endDate;
 	}
 
-	public Integer getPriorty() {
-		return priorty;
+	public Integer getPriority() {
+		return priority;
 	}
 
-	public void setPriorty(Integer priorty) {
-		this.priorty = priorty;
+	public void setPriority(Integer priority) {
+		this.priority = priority;
 	}
 
 	public Integer getStatus() {

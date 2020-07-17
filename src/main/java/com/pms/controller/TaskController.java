@@ -36,7 +36,7 @@ public class TaskController {
 			parentTask.setParentTask(task.getTask());
 			return parentTaskService.saveOrUpdate(parentTask);
 		}
-		else {
+		else {			
 			return taskService.saveOrUpdate(task);
 		}
 	}
@@ -44,8 +44,6 @@ public class TaskController {
 	@GetMapping("/task/getTask/{id}")
 	public Task getTask(@PathVariable String id) {
 		return taskService.getTask(Integer.parseInt(id));
-		
-		
 	}
 	
 	@GetMapping("/task/getAllTasks")
